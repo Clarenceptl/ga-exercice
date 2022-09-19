@@ -1,0 +1,31 @@
+name: Test workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm i
+    with:
+      args: -u --packageFile ./node-app/package.json --loglevel verbose
+
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
