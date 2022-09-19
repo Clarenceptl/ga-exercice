@@ -7,23 +7,20 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - name: package-update
+      - name: package-install
         uses: taichi/actions-package-update@master
         env:
           UPDATE_COMMAND: npm
         with:
           args: install
+      
+      - name: build test 
+        - uses: actions/checkout@v3
 
-  build-test:
-    runs-on: ubuntu-latest
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 16
 
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+        - run: npm ci
+        - run: npm run build
+        - run: npm test
