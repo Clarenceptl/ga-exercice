@@ -10,10 +10,6 @@ jobs:
       - name: package-update
         uses: taichi/actions-package-update@master
         env:
-          AUTHOR_EMAIL: potel.clarence@gmail.com
-          AUTHOR_NAME: Clarence
-          EXECUTE: "true"
-          GITHUB_TOKEN: ${{ secrets.TOTO }}
           UPDATE_COMMAND: npm
         with:
           args: install
